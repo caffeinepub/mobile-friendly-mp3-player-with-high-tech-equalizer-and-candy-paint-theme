@@ -1,0 +1,163 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-build-a-mobile-friendly-mp3-player-web-app-react-that-works-well-on-ios-safari-including-selecting-local-mp3-files-via-file-picker-a-visible-playlist-queue-play-pause-previous-next-seek-bar-current-time-duration-and-volume-control",
+      "featureTitle": "Build a mobile-friendly MP3 player web app (React) that works well on iOS Safari, including: selecting local MP3 files (via file picker), a visible playlist/queue, play/pause, previous/next, seek bar, current time/duration, and volume control.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/player/FilePickerButton.tsx",
+        "frontend/src/components/player/PlayerShell.tsx",
+        "frontend/src/components/player/PlaylistQueue.tsx",
+        "frontend/src/components/player/SeekBar.tsx",
+        "frontend/src/components/player/TransportControls.tsx",
+        "frontend/src/components/player/VolumeControl.tsx",
+        "frontend/src/hooks/useAudioPlayer.ts",
+        "frontend/src/index.css",
+        "frontend/src/utils/formatTime.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-high-tech-equalizer-using-built-in-browser-audio-capabilities-web-audio-api-including-an-on-off-toggle-multiple-frequency-bands-with-sliders-and-a-real-time-visualizer-e-g-spectrum-bars-that-reacts-to-the-playing-audio",
+      "featureTitle": "Add a high-tech equalizer using built-in browser audio capabilities (Web Audio API), including an on/off toggle, multiple frequency bands with sliders, and a real-time visualizer (e.g., spectrum bars) that reacts to the playing audio.",
+      "files": [
+        "frontend/src/components/equalizer/EqualizerPanel.tsx",
+        "frontend/src/components/equalizer/SpectrumVisualizer.tsx",
+        "frontend/src/components/player/PlayerShell.tsx",
+        "frontend/src/hooks/useEqualizer.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-cohesive-red-candy-paint-high-tech-skin-as-the-default-theme-and-provide-in-app-theme-color-options-multiple-alternate-colorways-while-keeping-the-same-overall-visual-style-glossy-candy-paint-high-tech-equalizer-aesthetic-use-english-for-all-user-facing-text",
+      "featureTitle": "Implement a cohesive 'red candy paint' high-tech skin as the default theme, and provide in-app theme color options (multiple alternate colorways) while keeping the same overall visual style (glossy candy paint + high-tech equalizer aesthetic). Use English for all user-facing text.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/theme/ThemeSwitcher.tsx",
+        "frontend/src/index.css",
+        "frontend/src/theme/ThemeProvider.tsx",
+        "frontend/src/theme/themes.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-a-candy-apple-on-a-stick-logo-and-integrate-it-into-the-app-ui-header-and-or-player-area-and-provide-an-app-icon-variant-using-the-same-logo-mark",
+      "featureTitle": "Generate a candy apple on a stick logo and integrate it into the app UI (header and/or player area) and provide an app icon variant using the same logo mark.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/App.tsx",
+        "frontend/src/components/branding/AppLogo.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-render-the-generated-images-as-static-assets-stored-in-frontend-public-assets-generated-and-reference-them-from-the-react-ui-do-not-serve-generated-images-through-the-backend",
+      "featureTitle": "Render the generated images as static assets stored in `frontend/public/assets/generated` and reference them from the React UI (do not serve generated images through the backend).",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/branding/AppLogo.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-basic-optional-persistence-for-non-audio-settings-selected-theme-equalizer-preset-values-last-used-volume-in-the-browser-so-they-are-restored-on-refresh",
+      "featureTitle": "Add basic optional persistence for non-audio settings (selected theme, equalizer preset values, last used volume) in the browser so they are restored on refresh.",
+      "files": [
+        "frontend/src/hooks/useAudioPlayer.ts",
+        "frontend/src/hooks/useEqualizer.ts",
+        "frontend/src/hooks/useLocalPreferences.ts",
+        "frontend/src/theme/ThemeProvider.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-small-motoko-backend-api-to-store-and-retrieve-user-preferences-theme-selection-and-equalizer-preset-values-keyed-by-authenticated-principal-when-internet-identity-is-used-the-app-must-still-function-without-sign-in-using-local-browser-persistence",
+      "featureTitle": "Create a small Motoko backend API to store and retrieve user preferences (theme selection and equalizer preset values) keyed by authenticated principal when Internet Identity is used; the app must still function without sign-in using local browser persistence.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/preferences/PreferenceSyncControls.tsx",
+        "frontend/src/hooks/usePreferenceSync.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

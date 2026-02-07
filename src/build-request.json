@@ -1,0 +1,149 @@
+{
+  "kind": "build_request",
+  "title": "Mobile-friendly MP3 player with high-tech equalizer and candy paint theme",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Build a mobile-friendly MP3 player web app (React) that works well on iOS Safari, including: selecting local MP3 files (via file picker), a visible playlist/queue, play/pause, previous/next, seek bar, current time/duration, and volume control.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Can you build me an MP3 player app for iOS"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can select one or more local .mp3 files and see them listed in a playlist/queue",
+        "Selecting a track starts playback, and play/pause/next/previous controls work",
+        "A seek bar allows scrubbing within the track and displays current time and duration",
+        "Volume can be adjusted in-app"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a high-tech equalizer using built-in browser audio capabilities (Web Audio API), including an on/off toggle, multiple frequency bands with sliders, and a real-time visualizer (e.g., spectrum bars) that reacts to the playing audio.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "make it with a high-tech equalizer (with built-in libraries)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Equalizer can be enabled/disabled without breaking playback",
+        "Equalizer exposes multiple adjustable bands (e.g., at least 5) that audibly affect playback",
+        "A real-time visualizer is displayed during playback and responds to the audio signal"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement a cohesive 'red candy paint' high-tech skin as the default theme, and provide in-app theme color options (multiple alternate colorways) while keeping the same overall visual style (glossy candy paint + high-tech equalizer aesthetic). Use English for all user-facing text.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with a red candy paint skin for the theme (with different color options)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Default theme is a red candy paint look with a consistent high-tech aesthetic across all screens/components",
+        "Users can switch between multiple theme color options and the UI updates immediately",
+        "All user-facing labels and messages are in English"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Generate a candy apple on a stick logo and integrate it into the app UI (header and/or player area) and provide an app icon variant using the same logo mark.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "will make the logo be a candy apple on a stick"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The candy-apple-on-a-stick logo appears in the app UI",
+        "An app icon image asset based on the logo is present in the project assets"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Render the generated images as static assets stored in `frontend/public/assets/generated` and reference them from the React UI (do not serve generated images through the backend).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "will make the logo be a candy apple on a stick"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under `frontend/public/assets/generated`",
+        "UI loads these images directly from static paths"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add basic optional persistence for non-audio settings (selected theme, equalizer preset values, last used volume) in the browser so they are restored on refresh.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with different color options"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Theme choice persists across page reloads",
+        "Equalizer slider settings persist across page reloads",
+        "Volume setting persists across page reloads"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Create a small Motoko backend API to store and retrieve user preferences (theme selection and equalizer preset values) keyed by authenticated principal when Internet Identity is used; the app must still function without sign-in using local browser persistence.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "MP3 player app for iOS"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When signed in, theme and equalizer settings can be saved to the backend and restored on another browser/session",
+        "When not signed in, the player remains usable and uses local persistence only",
+        "Backend remains a single Motoko actor in `backend/main.mo`"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under `frontend/src/components/ui` (compose these UI components instead).",
+    "Do not edit `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, or `frontend/src/main.tsx`.",
+    "Backend must remain a single Motoko actor in `backend/main.mo`; create `backend/migration.mo` only if an upgrade-safe state migration is actually needed."
+  ],
+  "nonGoals": [
+    "Do not produce a native iOS .ipa build artifact; this project targets a React + Motoko Internet Computer web app and cannot generate an Xcode/iOS archive within the zip download.",
+    "Do not integrate third-party authentication providers; only Internet Identity is allowed.",
+    "Do not rely on external databases or non-supported backend technologies."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Candy apple on a stick logo, glossy candy coating, high-tech sheen, clean vector-like edges (candy-apple-logo.dim_1024x1024.png)",
+      "App icon version of the candy apple on a stick, centered, simplified silhouette for small sizes, glossy finish (candy-apple-app-icon.dim_1024x1024.png)"
+    ],
+    "edits": []
+  }
+}

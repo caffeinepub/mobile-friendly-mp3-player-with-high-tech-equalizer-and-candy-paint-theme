@@ -1,0 +1,253 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Mobile-friendly MP3 player with equalizer, candy paint themes, and optional II preference sync",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement a mobile-friendly local-file MP3 player with playlist/queue and full playback controls suitable for iOS Safari.",
+      "acceptanceCriteria": [
+        "Users can select one or more local .mp3 files and see them listed in a playlist/queue",
+        "Selecting a track starts playback, and play/pause/next/previous controls work",
+        "A seek bar allows scrubbing within the track and displays current time and duration",
+        "Volume can be adjusted in-app"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main single-screen player UI composition (header + player + playlist) and wire up interactions to the audio/playlist hooks for local MP3 playback."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add baseline global styling for the app shell and mobile-safe layout (touch targets, spacing, safe-area padding) while staying compatible with Tailwind usage."
+        },
+        {
+          "path": "frontend/src/components/player/PlayerShell.tsx",
+          "operation": "create",
+          "description": "Create the main player shell layout component that composes existing shadcn/ui components (do not modify files under frontend/src/components/ui) to present track info, controls, and playlist."
+        },
+        {
+          "path": "frontend/src/components/player/FilePickerButton.tsx",
+          "operation": "create",
+          "description": "Implement an MP3 file picker using an input[type=file] (accept .mp3, multiple) and pass selected files into the playlist/queue state."
+        },
+        {
+          "path": "frontend/src/components/player/PlaylistQueue.tsx",
+          "operation": "create",
+          "description": "Render the visible playlist/queue with track selection, highlighting the current track, and support basic queue behaviors (select to play)."
+        },
+        {
+          "path": "frontend/src/components/player/TransportControls.tsx",
+          "operation": "create",
+          "description": "Implement play/pause, previous/next controls, and expose accessible labels in English; compose shadcn/ui buttons (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/player/SeekBar.tsx",
+          "operation": "create",
+          "description": "Implement a seek bar with scrub support plus current time/duration display; compose shadcn/ui slider (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/player/VolumeControl.tsx",
+          "operation": "create",
+          "description": "Implement in-app volume control and display; compose shadcn/ui slider (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAudioPlayer.ts",
+          "operation": "create",
+          "description": "Create a React hook to manage an HTMLAudioElement, playlist/queue state, playback state, current time/duration tracking, seeking, and volume; ensure iOS Safari-friendly user-gesture start behavior."
+        },
+        {
+          "path": "frontend/src/utils/formatTime.ts",
+          "operation": "create",
+          "description": "Add a small utility to format seconds as mm:ss for current time/duration display (English-only UI text)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add a Web Audio API equalizer with an on/off toggle, multiple band sliders, and a real-time audio visualizer.",
+      "acceptanceCriteria": [
+        "Equalizer can be enabled/disabled without breaking playback",
+        "Equalizer exposes multiple adjustable bands (e.g., at least 5) that audibly affect playback",
+        "A real-time visualizer is displayed during playback and responds to the audio signal"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useEqualizer.ts",
+          "operation": "create",
+          "description": "Implement Web Audio API wiring for the audio element: create an AudioContext, analyser, and at least 5 band filters; support toggling EQ on/off by reconnecting the graph without interrupting playback."
+        },
+        {
+          "path": "frontend/src/components/equalizer/EqualizerPanel.tsx",
+          "operation": "create",
+          "description": "Create an equalizer UI panel with an on/off toggle and multiple frequency band sliders; compose shadcn/ui controls (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/equalizer/SpectrumVisualizer.tsx",
+          "operation": "create",
+          "description": "Implement a real-time visualizer (canvas-based spectrum bars) driven by an AnalyserNode that reacts during playback."
+        },
+        {
+          "path": "frontend/src/components/player/PlayerShell.tsx",
+          "operation": "modify",
+          "description": "Integrate the EqualizerPanel and SpectrumVisualizer into the player UI so they operate on the currently playing audio element."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create a cohesive red candy paint high-tech default theme and provide in-app alternate colorways with immediate updates; keep all UI text in English.",
+      "acceptanceCriteria": [
+        "Default theme is a red candy paint look with a consistent high-tech aesthetic across all screens/components",
+        "Users can switch between multiple theme color options and the UI updates immediately",
+        "All user-facing labels and messages are in English"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/theme/themes.ts",
+          "operation": "create",
+          "description": "Define the default 'red candy paint' theme plus multiple alternate colorways using a consistent token set (CSS variables / Tailwind-compatible tokens)."
+        },
+        {
+          "path": "frontend/src/theme/ThemeProvider.tsx",
+          "operation": "create",
+          "description": "Add a ThemeProvider to manage current theme selection and apply theme tokens (e.g., to the document root) for immediate UI updates."
+        },
+        {
+          "path": "frontend/src/components/theme/ThemeSwitcher.tsx",
+          "operation": "create",
+          "description": "Implement an in-app theme selector UI (English labels) that allows switching between multiple color options; compose shadcn/ui components (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Implement the glossy 'candy paint' + high-tech aesthetic via global CSS variables and base styles (gradients/highlights, card surfaces, and consistent spacing) with the default theme set to red."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the app UI with ThemeProvider and place ThemeSwitcher into the header/player area without adding new top-level routes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Integrate a generated candy-apple-on-a-stick logo into the UI and include an app icon variant in project assets.",
+      "acceptanceCriteria": [
+        "The candy-apple-on-a-stick logo appears in the app UI",
+        "An app icon image asset based on the logo is present in the project assets"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/candy-apple-logo.dim_1024x1024.png",
+          "operation": "create",
+          "description": "Add the generated candy apple on a stick logo static asset at the required path for direct UI use."
+        },
+        {
+          "path": "frontend/public/assets/generated/candy-apple-app-icon.dim_1024x1024.png",
+          "operation": "create",
+          "description": "Add the generated app icon variant static asset at the required path for use as an app icon/fav icon source."
+        },
+        {
+          "path": "frontend/src/components/branding/AppLogo.tsx",
+          "operation": "create",
+          "description": "Create a small branding component that renders the logo image from frontend/public/assets/generated/candy-apple-logo.dim_1024x1024.png with appropriate alt text in English."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Render the AppLogo in the header and/or player area to satisfy visible branding in the UI."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Reference frontend/public/assets/generated/candy-apple-app-icon.dim_1024x1024.png as a favicon/app icon asset so the icon variant is actually used by the web app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Ensure generated images are stored as static assets under frontend/public/assets/generated and referenced directly from React UI.",
+      "acceptanceCriteria": [
+        "Generated images exist under `frontend/public/assets/generated`",
+        "UI loads these images directly from static paths"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/branding/AppLogo.tsx",
+          "operation": "modify",
+          "description": "Ensure the logo is referenced directly via its static asset path (frontend/public/assets/generated/candy-apple-logo.dim_1024x1024.png) rather than any backend-served mechanism."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Ensure icon references point to the static asset (frontend/public/assets/generated/candy-apple-app-icon.dim_1024x1024.png) and are not routed through backend functionality."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Persist non-audio settings locally (theme, EQ values, last used volume) and restore them on refresh.",
+      "acceptanceCriteria": [
+        "Theme choice persists across page reloads",
+        "Equalizer slider settings persist across page reloads",
+        "Volume setting persists across page reloads"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useLocalPreferences.ts",
+          "operation": "create",
+          "description": "Implement localStorage-backed persistence for theme selection, EQ slider values, and last used volume; provide safe defaults when no values exist."
+        },
+        {
+          "path": "frontend/src/hooks/useAudioPlayer.ts",
+          "operation": "modify",
+          "description": "Read initial volume from the local preferences hook and write volume changes back to local persistence."
+        },
+        {
+          "path": "frontend/src/hooks/useEqualizer.ts",
+          "operation": "modify",
+          "description": "Initialize EQ band values from the local preferences hook and persist slider changes back to local storage (including enabled/disabled state if desired)."
+        },
+        {
+          "path": "frontend/src/theme/ThemeProvider.tsx",
+          "operation": "modify",
+          "description": "Initialize the active theme from local preferences and persist theme changes immediately on selection."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add optional Internet Identity-based preference sync (theme + EQ values) while keeping the app fully usable without sign-in using local persistence.",
+      "acceptanceCriteria": [
+        "When signed in, theme and equalizer settings can be saved to the backend and restored on another browser/session",
+        "When not signed in, the player remains usable and uses local persistence only",
+        "Backend remains a single Motoko actor in `backend/main.mo`"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePreferenceSync.ts",
+          "operation": "create",
+          "description": "Create a hook that uses useInternetIdentity + useActor to (a) load remote preferences when authenticated and (b) save preferences when the user requests or when settings change, while gracefully falling back to local-only behavior when not authenticated."
+        },
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add an optional Internet Identity login/logout button using the existing useInternetIdentity hook (do not modify the hook file). Keep labels/messages in English."
+        },
+        {
+          "path": "frontend/src/components/preferences/PreferenceSyncControls.tsx",
+          "operation": "create",
+          "description": "Add simple UI controls to indicate sign-in status and allow saving/restoring preferences to/from the backend when authenticated; compose shadcn/ui components (do not modify files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LoginButton and PreferenceSyncControls into the existing single-screen layout and connect them to the preference sync hook without gating core playback behind authentication."
+        }
+      ]
+    }
+  ]
+}
